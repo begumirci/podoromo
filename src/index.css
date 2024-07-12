@@ -1,0 +1,52 @@
+:root {
+  --redColor: #f87070;
+  --blueColor: #70f3f8;
+  --purpleColor: #d881f8;
+  --defaultColor: #d7e0ff;
+  --defaultOpacitColor: rgba(215, 224, 255, 0.4);
+  --darkColor: #161932;
+
+  --spaceMono: 'Space Mono', monospace;
+  --robotoSlab: 'Roboto Slab', serif;
+  --kumbhSans: 'Kumbh Sans', sans-serif;
+}
+
+.custom-tab .MuiTab-root {
+  color: var(--defaultOpacitColor) !important;
+  padding-inline: 25px;
+  padding-block: 15px;
+  border-radius: 50px;
+  transition: all 0.3s ease;
+}
+.custom-tab {
+  width: fit-content;
+  border: 1px solid var(--darkColor);
+  background-color: var(--darkColor);
+  border-radius: 50px;
+  padding: 8px;
+  margin: auto;
+}
+.custom-tab .MuiTabs-indicator {
+  display: none;
+}
+
+.timer {
+  box-shadow: 50px 50px 100px 0px #121530;
+  background: linear-gradient(315deg, #2e325a 0%, #0e112a 100%);
+  box-shadow: -50px -50px 100px 0px #272c5a;
+  border-radius: 50%;
+}
+
+.normal {
+  cursor: pointer;
+  color: black;
+  background-color: #eff1fa;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+}
+.choose {
+  background-color: black;
+  color: white;
+}
