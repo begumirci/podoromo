@@ -1,9 +1,9 @@
 export const initialState = {
   counter: 0,
   time: {
-    pomodoro: '02:00',
-    shortBreak: '02:00',
-    longBreak: '07:00',
+    pomodoro: 5,
+    shortBreak: 7,
+    longBreak: 10,
   },
   currentTime: 0,
   isStart: false,

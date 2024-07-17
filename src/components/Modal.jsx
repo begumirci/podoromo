@@ -1,16 +1,16 @@
 import {
   Dialog,
-  DialogActions,
   DialogContent,
-  Button,
   TextField,
   Box,
   Stack,
   Typography,
+  IconButton,
 } from '@mui/material';
 import Slide from '@mui/material/Slide';
-import { forwardRef, useEffect, useState } from 'react';
+import { forwardRef } from 'react';
 import { UseGlobalContext } from '../store/context';
+import CloseIcon from '@mui/icons-material/Close';
 
 const Transition = forwardRef(function Transition(props, ref) {
   return <Slide direction='up' ref={ref} {...props} />;
@@ -32,6 +32,18 @@ export default function Modal({ open, setOpen }) {
         onClose={handleClose}
         aria-describedby='alert-dialog-slide-description'
       >
+        <IconButton
+          onClick={handleClose}
+          sx={{
+            color: 'black',
+            paddingTop: '20px',
+            width: '20px',
+            position: 'absolute',
+            right: '24px',
+          }}
+        >
+          <CloseIcon />
+        </IconButton>
         <DialogContent>
           <Typography
             marginBottom={5}
@@ -47,6 +59,7 @@ export default function Modal({ open, setOpen }) {
               </Typography>
               <TextField
                 defaultValue={state.time.pomodoro}
+                type='number'
                 onChange={(e) =>
                   dispatch({
                     type: 'ChangeTime',
@@ -61,6 +74,7 @@ export default function Modal({ open, setOpen }) {
               </Typography>
               <TextField
                 defaultValue={state.time.shortBreak}
+                type='number'
                 onChange={(e) =>
                   dispatch({
                     type: 'ChangeTime',
@@ -75,6 +89,7 @@ export default function Modal({ open, setOpen }) {
               </Typography>
               <TextField
                 defaultValue={state.time.longBreak}
+                type='number'
                 onChange={(e) =>
                   dispatch({
                     type: 'ChangeTime',
@@ -160,9 +175,24 @@ export default function Modal({ open, setOpen }) {
           </Box>
         </DialogContent>
 
-        <Button onClick={handleClose} variant='contained'>
-          Disagree
-        </Button>
+        <button
+          onClick={handleClose}
+          style={{
+            backgroundColor: `${state.colorMode}`,
+            width: '100%',
+            paddingBlock: '15px',
+            paddingInline: '47px',
+            margin: 'auto',
+            border: 'none',
+            color: 'white',
+            fontSize: '16px',
+            cursor: 'pointer',
+            transition: 'all .2s ease',
+            fontFamily: `${state.fontMode}`,
+          }}
+        >
+          Apply
+        </button>
       </Dialog>
     </>
   );

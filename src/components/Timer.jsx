@@ -8,26 +8,33 @@ import {
 import SettingsIcon from '@mui/icons-material/Settings';
 import { UseGlobalContext } from '../store/context';
 import Modal from './Modal';
+import useSound from 'use-sound';
+import mySound from '../sounds/437661__dersuperanton__time-over-deep-voice.wav';
 
 import { useEffect, useState } from 'react';
 
 export default function Timer() {
   const { dispatch, state, setOpen, open } = UseGlobalContext();
   const [timeKey, setTimeKey] = useState(state.timeKey);
-  const [timeValue, setTimeValue] = useState(state.time[timeKey]);
+  const [timeValue, setTimeValue] = useState(formatTime(state.time[timeKey]));
   const [cycle, setCycle] = useState(0);
   const [progress, setProgress] = useState(0);
-
-  console.log(state.time[timeKey]);
+  const [play] = useSound(mySound);
 
   useEffect(() => {
     setTimeKey(state.timeKey);
-    setTimeValue(state.time[state.timeKey]);
+    setTimeValue(formatTime(state.time[state.timeKey]));
   }, [state.timeKey, state.time]);
+
+  function formatTime(number) {
+    const hours = String(number).padStart(2, '0');
+    console.log(hours);
+    return `${hours}:00`;
+  }
 
   useEffect(() => {
     if (state.isStart) {
-      let totalTime = convertToSeconds(state.time[timeKey]);
+      let totalTime = convertToSeconds(formatTime(state.time[timeKey]));
 
       let interval = setInterval(() => {
         setTimeValue((item) => {
@@ -75,13 +82,16 @@ export default function Timer() {
       if (cycle === 2) {
         dispatch({ type: 'setTimeKey', payload: 'longBreak' });
         setCycle(0);
+        play();
       } else {
         dispatch({ type: 'setTimeKey', payload: 'shortBreak' });
         setCycle(cycle + 1);
+        play();
       }
     } else {
       dispatch({ type: 'setTimeKey', payload: 'pomodoro' });
       if (cycle === 3) {
+        play();
         return;
       }
     }
@@ -89,7 +99,9 @@ export default function Timer() {
   };
 
   function convertToSeconds(time) {
+    console.log(time);
     let [minutes, seconds] = time.split(':').map(Number);
+
     return minutes * 60 + seconds;
   }
 

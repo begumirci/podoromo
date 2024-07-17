@@ -20,7 +20,6 @@ export default function TabsComp() {
   const handleChange = () => {
     dispatch({ type: 'ShowTime', payload: value });
   };
-  console.log(value);
 
   return (
     <Stack>
